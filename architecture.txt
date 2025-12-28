@@ -1,0 +1,53 @@
+Backend-App-CI4/  # Root project
+├── app/  # Inti aplikasi (MVC)
+│   ├── Config/  # Konfigurasi (database, routes, dll.)
+│   │   ├── App.php
+│   │   ├── Database.php  # Konfigurasi MySQL
+│   │   ├── Routes.php  # Semua routes (dari private-api.js)
+│   │   ├── Filters.php  # Global filters
+│   │   └── Exceptions.php
+│   ├── Controllers/  # Controllers (dari src/controller/)
+│   │   ├── AccountController.php  # CRUD akun (get, update, logout)
+│   │   ├── PeranController.php  # CRUD peran
+│   │   ├── MenuController.php  # CRUD menu
+│   │   ├── AkunPeranController.php  # CRUD akun-peran
+│   │   └── PeranMenuController.php  # CRUD peran-menu
+│   ├── Models/  # Models untuk DB interaction (ganti Prisma)
+│   │   ├── AkunModel.php
+│   │   ├── PeranModel.php
+│   │   ├── MenuModel.php
+│   │   ├── AkunPeranModel.php
+│   │   └── PeranMenuModel.php
+│   ├── Libraries/  # Services & business logic (dari src/service/)
+│   │   ├── AkunService.php
+│   │   ├── PeranService.php
+│   │   └── ValidationLibrary.php  # Custom validation (ganti Joi)
+│   ├── Filters/  # Middleware (dari src/middleware/)
+│   │   ├── AuthFilter.php  # Autentikasi (ganti auth-middleware.js)
+│   │   └── ErrorFilter.php  # Error handling (ganti error-middleware.js)
+│   ├── Helpers/  # Utilities (dari src/utils/)
+│   │   └── query_helper.php  # Query parsing (ganti query.js)
+│   ├── Database/  # Migrations & seeds (ganti Prisma schema)
+│   │   ├── Migrations/
+│   │   │   ├── 2025-12-28-000001_create_akun_table.php
+│   │   │   ├── 2025-12-28-000002_create_peran_table.php
+│   │   │   ├── 2025-12-28-000003_create_menu_table.php
+│   │   │   ├── 2025-12-28-000004_create_akun_peran_table.php
+│   │   │   └── 2025-12-28-000005_create_peran_menu_table.php
+│   │   └── Seeds/
+│   │       └── DatabaseSeeder.php
+│   └── Views/  # Kosong (API-only, tidak ada templates)
+├── public/  # Entry point web
+│   └── index.php
+├── tests/  # Unit/integration tests (ganti Jest dengan PHPUnit)
+│   ├── Controllers/
+│   │   ├── AccountControllerTest.php
+│   │   └── PeranControllerTest.php
+│   └── Database/
+│       └── MigrationTest.php
+├── vendor/  # Dependencies (via Composer)
+├── writable/  # Logs, cache, sessions
+├── system/  # CI4 core (jangan edit)
+├── composer.json  # PHP dependencies
+├── phpunit.xml  # Test config
+└── spark  # CLI tool untuk commands (e.g., migrate, serve)
