@@ -19,7 +19,7 @@ services:
       - "3306:3306"  # Expose MySQL port
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword  # Password root
-      MYSQL_DATABASE: trackingapp  # Nama DB
+      MYSQL_DATABASE: userservice  # Nama DB
       MYSQL_USER: user  # User DB
       MYSQL_PASSWORD: password  # Password user
       MYSQL_COMMAND: --sql_mode=""
