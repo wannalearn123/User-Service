@@ -45,11 +45,52 @@ class AkunPeranModel extends Model
     protected $afterDelete    = [];
 
     // Create function
+    public function createAkunPeran(array $data): int
+    {
+        $this->insert($data);
+        return $this->getInsertID();
+    }
+
     // Read function
+    public function getAkunPeran(int $id): ?array
+    {
+        return $this->find($id);
+    }
+    public function getAllAkunPeran(): array
+    {
+        return $this->findAll();
+    }
+
     // Update function
+    public function updateAkunPeran(int $id, array $data): bool
+    {
+        return $this->update($id, $data);
+    }
+
     // Delete function
+    public function deleteAkunPeran(int $id): bool
+    {
+        return $this->delete($id);
+    }
 
     // Assign Peran ke User
+    public function assignPeranToUser(int $akunId, int $peranId): int
+    {
+        return $this->createAkunPeran([
+            'akun_id' => $akunId,
+            'peran_id' => $peranId,
+        ]);
+    }
 
     // Revoke Peran dari User
+    public function revokePeranFromUser(int $akunId, int $peranId): bool
+    {
+        $akunPeran = $this->where('akun_id', $akunId)
+                         ->where('peran_id', $peranId)
+                         ->first();
+        if ($akunPeran) {
+            return $this->delete($akunPeran['id']);
+        }
+        return false;
+    }
 }
