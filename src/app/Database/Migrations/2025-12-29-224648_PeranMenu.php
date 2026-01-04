@@ -61,6 +61,7 @@ class PeranMenu extends Migration
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('peran_id', 'peran', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('menu_id', 'menu', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addUniqueKey(['peran_id', 'menu_id']);
         $this->forge->createTable('peran_menu');
     }
 

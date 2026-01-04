@@ -56,11 +56,12 @@ class Menu extends Migration
             ]
         ]);
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('parent', 'menu', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('menu');
     }
 
     public function down()
     {
-        //
+        $this->forge->dropTable('menu');
     }
 }

@@ -32,7 +32,7 @@ class Akun extends Migration
                 'constraint' => '255',
                 'null'       => false,
             ],
-            'nama'      => [
+            'name'      => [
                 'type'       => 'VARCHAR',
                 'constraint' => '128',
                 'null'       => true,

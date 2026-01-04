@@ -54,13 +54,4 @@ class AkunModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    //get akun with peran
-    public function getAkunWithPeran($id)
-    {
-        return $this->select('akun.*, peran.name, akun_peran.identitas')
-            ->join('akun_peran', 'akun_peran.akun_id = akun.id', 'left')
-            ->join('peran', 'peran.id = akun_peran.peran_id', 'left')
-            ->where('akun.id', $id)
-            ->findAll();
-    }
 }

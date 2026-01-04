@@ -1,10 +1,21 @@
 FROM php:8.2-apache
-RUN apt update && apt install -y libicu-dev
+
+# Install system dependencies
+RUN apt update && apt install -y libicu-dev unzip git
 RUN docker-php-ext-install intl mysqli
+
+# Install Composer
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+RUN php -r "if (hash_file('sha384', 'composer-setup.php') === 'c8b085408188070d5f52bcfe4ecfbee5f727afa458b2573b8eaaf77b3419b0bf2768dc67c86944da1544f06fa544fd47') { echo 'Installer verified'.PHP_EOL; } else { echo 'Installer corrupt'.PHP_EOL; unlink('composer-setup.php'); exit(1); }"
+RUN php composer-setup.php
+RUN php -r "unlink('composer-setup.php');"
+
+# Set working directory
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /etc/apache2/sites-available/000-default.conf
 RUN sed -i 's|<Directory /var/www/html>|<Directory /var/www/html/public>|' /etc/apache2/sites-available/000-default.conf
 RUN a2enmod rewrite
+
 RUN chown -R www-data:www-data /var/www/html
 EXPOSE 80
 CMD ["apache2-foreground"]

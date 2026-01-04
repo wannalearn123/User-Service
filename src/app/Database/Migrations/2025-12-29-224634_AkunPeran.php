@@ -25,7 +25,7 @@ class AkunPeran extends Migration
                 'constraint' => 11,
                 'unsigned'   => true,
             ],
-            'identitas' => [
+            'identity' => [
                 'type'       => 'INT',
                 'constraint' => 11,
                 'null'       => true,
@@ -46,6 +46,7 @@ class AkunPeran extends Migration
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('akun_id', 'akun', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('peran_id', 'peran', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addUniqueKey(['akun_id', 'peran_id']);
         $this->forge->createTable('akun_peran');
     }
 
