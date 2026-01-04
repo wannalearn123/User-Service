@@ -12,7 +12,7 @@ class AkunPeranModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['akun_id', 'peran_id', 'identitas'];
+    protected $allowedFields    = ['akun_id', 'peran_id', 'identity'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -43,4 +43,13 @@ class AkunPeranModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    // Create function
+    // Read function
+    // Update function
+    // Delete function
+
+    // Assign Peran ke User
+
+    // Revoke Peran dari User
 }

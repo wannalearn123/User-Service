@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class PeranMenuModel extends Model
 {
-    protected $table            = 'peranmenus';
+    protected $table            = 'peran_menu';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['peran_id', 'menu_id', 'c', 'r', 'u', 'd'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -43,4 +43,15 @@ class PeranMenuModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    // Create function
+    // Read function
+    // Update function
+    // Delete function
+
+    // Set Permission Menu ke Peran
+    // Check Permission Menu dari Peran
+    // Revoke Permission Menu dari Peran
+
+    // Get Menu by Peran
 }
