@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class AkunPeranModel extends Model
 {
-    protected $table            = 'akunperans';
+    protected $table            = 'akun_peran';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['akun_id', 'peran_id', 'identitas'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

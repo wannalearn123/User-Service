@@ -17,13 +17,13 @@ class Akun extends Migration
             ],
             'username'    => [
                 'type'       => 'VARCHAR',
-                'constraint' => '100',
+                'constraint' => '64',
                 'null'       => false,
                 'unique'     => true
             ],
             'email'      => [
                 'type'       => 'VARCHAR',
-                'constraint' => '100',
+                'constraint' => '255',
                 'null'       => false,
                 'unique'     => true
             ],
@@ -32,6 +32,16 @@ class Akun extends Migration
                 'constraint' => '255',
                 'null'       => false,
             ],
+            'nama'      => [
+                'type'       => 'VARCHAR',
+                'constraint' => '128',
+                'null'       => true,
+            ],
+            'token'      => [
+                'type'       => 'VARCHAR',
+                'constraint' => '128',
+                'null'       => true,
+            ],
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => false,
@@ -39,6 +49,10 @@ class Akun extends Migration
             'updated_at' => [
                 'type' => 'DATETIME',
                 'null' => false,
+            ],
+            'deleted_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
             ],
         ]);
         $this->forge->addKey('id', true);

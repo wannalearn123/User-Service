@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class MenuModel extends Model
 {
-    protected $table            = 'menus';
+    protected $table            = 'menu';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
