@@ -10,10 +10,29 @@ class AkunController extends BaseController
 {
     use ResponseTrait;
 
-    /**
-     * Fitur Register
-     * Menggunakan fungsi createAkun dari Model
-     */
+    class AkunController extends BaseController
+{
+    use ResponseTrait; 
+
+    public function index()
+    {
+        $model = new AkunModel();
+        $data = $model->findAll();
+        return $this->respond($data); 
+    }
+
+    public function create()
+    {
+        $model = new AkunModel();
+        $data = $this->request->getJSON();
+        
+
+        if ($model->insert($data)) {
+            return $this->respondCreated($data, 'Akun berhasil dibuat');
+        }
+        return $this->fail($model->errors());
+    }
+}
     public function register()
     {
         $model = new AkunModel();
