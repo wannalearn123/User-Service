@@ -2,46 +2,48 @@
 
 namespace App\Filters;
 
-use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\Filters\FilterInterface;
+use Config\Services;
 
 class AuthFilter implements FilterInterface
 {
     /**
-     * Do whatever processing this filter needs to do.
-     * By default it should not return anything during
-     * normal execution. However, when an abnormal state
-     * is found, it should return an instance of
-     * CodeIgniter\HTTP\Response. If it does, script
-     * execution will end and that Response will be
-     * sent back to the client, allowing for error pages,
-     * redirects, etc.
-     *
-     * @param RequestInterface $request
-     * @param array|null       $arguments
-     *
-     * @return RequestInterface|ResponseInterface|string|void
+     * Mengecek token autentikasi sebelum request diproses controller.
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        //
+        $authHeader = $request->getHeaderLine('Authorization');
+
+        // Pastikan token ada di header (biasanya format: Bearer TOKEN) 
+        if (empty($authHeader) || !preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
+            return Services::response()
+                ->setJSON([
+                    'status' => 401,
+                    'error' => 'Unauthorized',
+                    'message' => 'Token autentikasi diperlukan untuk mengakses layanan ini.'
+                ])
+                ->setStatusCode(ResponseInterface::HTTP_UNAUTHORIZED);
+        }
+
+        $token = $matches[1];
+
+        // LOGIKA VALIDASI: Di sini kamu bisa cek ke database atau decode JWT 
+        // untuk memastikan token tersebut benar-benar milik user yang valid[cite: 8, 9].
+        if ($token !== "TOKEN_RAHASIA_DARI_LOGIN") { 
+            return Services::response()
+                ->setJSON([
+                    'status' => 401,
+                    'error' => 'Invalid Token',
+                    'message' => 'Sesi Anda telah berakhir atau token tidak valid.'
+                ])
+                ->setStatusCode(ResponseInterface::HTTP_UNAUTHORIZED);
+        }
     }
 
-    /**
-     * Allows After filters to inspect and modify the response
-     * object as needed. This method does not allow any way
-     * to stop execution of other after filters, short of
-     * throwing an Exception or Error.
-     *
-     * @param RequestInterface  $request
-     * @param ResponseInterface $response
-     * @param array|null        $arguments
-     *
-     * @return ResponseInterface|void
-     */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        //
+        // Biasanya dibiarkan kosong untuk filter autentikasi
     }
 }
